@@ -7,11 +7,11 @@ import { TechnicalSkills } from "@/components/technical-skills";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 import { Brain, Cloud, Code, Copy, Database, Github, Linkedin, Mail, Server, Users } from "lucide-react";
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaWhatsapp } from "react-icons/fa";
-import { useToast } from "@/hooks/use-toast";
 
 export default function Portfolio() {
   const { toast } = useToast();
@@ -292,7 +292,7 @@ export default function Portfolio() {
       {/* Footer */}
       <footer className="py-8 bg-gray-900 dark:bg-black text-gray-300 dark:text-white/60 transition-colors duration-300">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2024 Fernando Velasquez - Desarrollador de Software Full Stack. Todos los derechos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} Fernando Velasquez - Desarrollador de Software Full Stack. Todos los derechos reservados.</p>
         </div>
       </footer>
     </div>
