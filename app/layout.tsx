@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { DM_Sans } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
