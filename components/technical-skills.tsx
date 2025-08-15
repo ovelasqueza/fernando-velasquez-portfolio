@@ -94,7 +94,7 @@ export function TechnicalSkills() {
                 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <Badge variant="outline" className="border-emerald-500/30 text-white hover:bg-emerald-500/20 text-xs">
+                <Badge variant="outline" className="border-emerald-500/30 text-white hover:bg-emerald-500/20 text-base">
                   {lang}
                 </Badge>
               </motion.div>
@@ -137,7 +137,7 @@ export function TechnicalSkills() {
                 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <Badge variant="outline" className="border-emerald-500/30 text-white hover:bg-emerald-500/20 text-xs">
+                <Badge variant="outline" className="border-emerald-500/30 text-white hover:bg-emerald-500/20 text-base">
                   {framework}
                 </Badge>
               </motion.div>
@@ -180,7 +180,7 @@ export function TechnicalSkills() {
                 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <Badge variant="outline" className="border-emerald-500/30 text-white hover:bg-emerald-500/20 text-xs">
+                <Badge variant="outline" className="border-emerald-500/30 text-white hover:bg-emerald-500/20 text-base">
                   {db}
                 </Badge>
               </motion.div>
@@ -223,7 +223,7 @@ export function TechnicalSkills() {
                 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <Badge variant="outline" className="border-emerald-500/30 text-white hover:bg-emerald-500/20 text-xs">
+                <Badge variant="outline" className="border-emerald-500/30 text-white hover:bg-emerald-500/20 text-base">
                   {tool}
                 </Badge>
               </motion.div>
