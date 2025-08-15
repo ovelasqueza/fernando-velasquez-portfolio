@@ -23,13 +23,13 @@ export default function Portfolio() {
   const contactRef = useScrollAnimation(0.3);
 
   const fadeInUpVariants = {
-    hidden: { opacity: 0, y: 60 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: 0.6,
+        ease: "easeOut" as any
       }
     }
   };
@@ -45,14 +45,14 @@ export default function Portfolio() {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: 0.5,
+        ease: "easeOut" as any
       }
     }
   };
@@ -263,7 +263,7 @@ export default function Portfolio() {
                     transition: { duration: 0.3 }
                   }}
                 >
-                  <Card className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900/80 dark:to-slate-900/80 border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10 h-full">
+                  <Card className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900/80 dark:to-slate-900/80 border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-2xl hover:shadow-emerald-500/30 md:shadow-md md:shadow-emerald-500/10 md:hover:shadow-xl md:hover:shadow-emerald-500/25 h-full">
                     <CardHeader className="pb-4">
                       <motion.div 
                         className="text-emerald-400 mb-4"
@@ -321,7 +321,7 @@ export default function Portfolio() {
                     transition: { duration: 0.3 }
                   }}
                 >
-                  <Card className="bg-gradient-to-br from-gray-900/80 to-slate-900/80 dark:from-gray-900/80 dark:to-slate-900/80 light:from-white light:to-gray-50 border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10">
+                  <Card className="bg-gradient-to-br from-gray-900/80 to-slate-900/80 dark:from-gray-900/80 dark:to-slate-900/80 light:from-white light:to-gray-50 border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-2xl hover:shadow-emerald-500/30 md:shadow-md md:shadow-emerald-500/10 md:hover:shadow-xl md:hover:shadow-emerald-500/25">
                     <CardHeader>
                       <div className="flex flex-col sm:flex-row items-start gap-4">
                         <motion.div 
