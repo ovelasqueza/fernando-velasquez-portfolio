@@ -8,13 +8,54 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/use-scroll-animation";
 import { Brain, Cloud, Code, Copy, Database, Github, Linkedin, Mail, Server, Users } from "lucide-react";
+import { motion } from "framer-motion";
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function Portfolio() {
   const { toast } = useToast();
+  const aboutRef = useScrollAnimation(0.2);
+  const servicesRef = useStaggeredAnimation(6, 0.15);
+  const projectsRef = useStaggeredAnimation(3, 0.2);
+  const contactRef = useScrollAnimation(0.3);
+
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 60 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const staggerContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
   const projects: Project[] = [
     {
       title: "Plataforma Integral de Gestión de Tareas y Usuarios con Laravel, Angular y Flutter ",
@@ -79,222 +120,372 @@ export default function Portfolio() {
       <HeroSection />
 
       {/* About Section */}
-      <section id="sobre-mi" className="py-20">
+      <motion.section 
+        id="sobre-mi" 
+        className="py-20"
+        ref={aboutRef.ref}
+        initial="hidden"
+        animate={aboutRef.isVisible ? "visible" : "hidden"}
+        variants={staggerContainerVariants}
+      >
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white transition-colors duration-300">
+            <motion.h2 
+              className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white transition-colors duration-300"
+              variants={fadeInUpVariants}
+            >
               Sobre Mí
-            </h2>
+            </motion.h2>
             <div className="grid lg:grid-cols-3 gap-12">
-              <div className="lg:col-span-2 lg:order-1 order-2">
+              <motion.div 
+                className="lg:col-span-2 lg:order-1 order-2"
+                variants={fadeInUpVariants}
+              >
                 <div className="mb-12">
                   <div className="flex flex-col gap-8">
                     <div className="flex-1">
-                      <p className="text-lg text-gray-700 dark:text-white mb-6 leading-relaxed transition-colors duration-300">
+                      <motion.p 
+                        className="text-lg text-gray-700 dark:text-white mb-6 leading-relaxed transition-colors duration-300"
+                        variants={fadeInUpVariants}
+                      >
                         Con más de <strong className="text-emerald-400">5 años de experiencia</strong> como
                         desarrollador full stack, diseño y desarrollo aplicaciones web de alta complejidad y sistemas backend robustos capaces de gestionar grandes volúmenes de datos y usuarios.
-                      </p>
-                      <p className="text-lg text-gray-700 dark:text-white mb-8 leading-relaxed transition-colors duration-300">
+                      </motion.p>
+                      <motion.p 
+                        className="text-lg text-gray-700 dark:text-white mb-8 leading-relaxed transition-colors duration-300"
+                        variants={fadeInUpVariants}
+                      >
                         Mi experiencia abarca desde la creación de interfaces de usuario modernas e intuitivas, hasta la definición de arquitecturas de sistemas distribuidos, administración de bases de datos a nivel empresarial y despliegue de soluciones cloud altamente escalables.
-                      </p>
-                      <p className="text-lg text-gray-700 dark:text-white mb-8 leading-relaxed transition-colors duration-300">
+                      </motion.p>
+                      <motion.p 
+                        className="text-lg text-gray-700 dark:text-white mb-8 leading-relaxed transition-colors duration-300"
+                        variants={fadeInUpVariants}
+                      >
                         Comprometido con el código limpio, la calidad del software y la aplicación de las mejores prácticas de desarrollo, busco siempre construir soluciones eficientes, seguras y mantenibles.
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                      </motion.p>
+                      <motion.div 
+                        className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+                        variants={fadeInUpVariants}
+                      >
                         <Link href="https://github.com/ovelasqueza" target="_blank" rel="noopener noreferrer">
-                          <Button
-                            variant="outline"
-                            size="default"
-                            className="border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-white hover:shadow-lg hover:shadow-emerald-500/50 hover:scale-105 transition-all duration-300 bg-transparent"
-                          >
-                            <Github className="h-5 w-5 mr-2" />
-                            GitHub
-                          </Button>
+                          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            <Button
+                              variant="outline"
+                              size="default"
+                              className="border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-white hover:shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 bg-transparent"
+                            >
+                              <Github className="h-5 w-5 mr-2" />
+                              GitHub
+                            </Button>
+                          </motion.div>
                         </Link>
                         <Link href="https://www.linkedin.com/in/ovelasquezan" target="_blank" rel="noopener noreferrer">
-                          <Button
-                            variant="outline"
-                            size="default"
-                            className="border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-white hover:shadow-lg hover:shadow-emerald-500/50 hover:scale-105 transition-all duration-300 bg-transparent"
-                          >
-                            <Linkedin className="h-5 w-5 mr-2" />
-                            LinkedIn
-                          </Button>
+                          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            <Button
+                              variant="outline"
+                              size="default"
+                              className="border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-white hover:shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 bg-transparent"
+                            >
+                              <Linkedin className="h-5 w-5 mr-2" />
+                              LinkedIn
+                            </Button>
+                          </motion.div>
                         </Link>
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="lg:order-2 order-1 -mt-4 lg:-mt-12">
-                <Image
-                  src="/foto linke.png"
-                  alt="Fernando Velasquez"
-                  width={400}
-                  height={400}
-                  className="transition-all duration-300 ease-in-out drop-shadow-[0_0_25px_rgba(16,185,129,0.7)] hover:drop-shadow-[0_0_35px_rgba(16,185,129,0.9)]"
-                  style={{
-                    borderRadius: "999px"
+              <motion.div 
+                className="lg:order-2 order-1 -mt-4 lg:-mt-12"
+                variants={fadeInUpVariants}
+              >
+                <motion.div
+                  whileHover={{ 
+                    scale: 1.05,
+                    rotate: 2,
+                    transition: { duration: 0.3 }
                   }}
-                />
-              </div>
+                >
+                  <Image
+                    src="/foto linke.png"
+                    alt="Fernando Velasquez"
+                    width={400}
+                    height={400}
+                    className="transition-all duration-300 ease-in-out drop-shadow-[0_0_25px_rgba(16,185,129,0.7)] hover:drop-shadow-[0_0_35px_rgba(16,185,129,0.9)]"
+                    style={{
+                      borderRadius: "999px"
+                    }}
+                  />
+                </motion.div>
+              </motion.div>
             </div>
 
-            <div className="mt-16">
+            <motion.div 
+              className="mt-16"
+              variants={fadeInUpVariants}
+            >
               <TechnicalSkills />
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <Experience />
 
       {/* Services Section */}
-      <section
+      <motion.section
         id="servicios"
         className="py-20 bg-gradient-to-r from-gray-100/50 to-white/50 dark:from-slate-900/50 dark:to-gray-950/50 transition-colors duration-300"
+        ref={servicesRef.ref}
+        initial="hidden"
+        animate={servicesRef.visibleItems.some(Boolean) ? "visible" : "hidden"}
+        variants={staggerContainerVariants}
       >
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white transition-colors duration-300">
+            <motion.h2 
+              className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white transition-colors duration-300"
+              variants={fadeInUpVariants}
+            >
               Servicios
-            </h2>
+            </motion.h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {services.map((service, index) => (
-                <Card
+                <motion.div
                   key={index}
-                  className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900/80 dark:to-slate-900/80 border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10"
+                  variants={cardVariants}
+                  initial="hidden"
+                  animate={servicesRef.visibleItems[index] ? "visible" : "hidden"}
+                  whileHover={{ 
+                    y: -8,
+                    transition: { duration: 0.3 }
+                  }}
                 >
-                  <CardHeader className="pb-4">
-                    <div className="text-emerald-400 mb-4">{service.icon}</div>
-                    <CardTitle className="text-xl text-gray-900 dark:text-white transition-colors duration-300">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-gray-600 dark:text-white/80 transition-colors duration-300">
-                      {service.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
+                  <Card className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900/80 dark:to-slate-900/80 border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10 h-full">
+                    <CardHeader className="pb-4">
+                      <motion.div 
+                        className="text-emerald-400 mb-4"
+                        whileHover={{ 
+                          scale: 1.1,
+                          rotate: 5,
+                          transition: { duration: 0.2 }
+                        }}
+                      >
+                        {service.icon}
+                      </motion.div>
+                      <CardTitle className="text-xl text-gray-900 dark:text-white transition-colors duration-300">
+                        {service.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-gray-600 dark:text-white/80 transition-colors duration-300">
+                        {service.description}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Projects Section */}
-      <section id="proyectos" className="py-20">
+      <motion.section 
+        id="proyectos" 
+        className="py-20"
+        ref={projectsRef.ref}
+        initial="hidden"
+        animate={projectsRef.visibleItems.some(Boolean) ? "visible" : "hidden"}
+        variants={staggerContainerVariants}
+      >
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12 text-white dark:text-white light:text-gray-900 transition-colors duration-300">
+            <motion.h2 
+              className="text-4xl font-bold text-center mb-12 text-white dark:text-white light:text-gray-900 transition-colors duration-300"
+              variants={fadeInUpVariants}
+            >
               Proyectos Destacados
-            </h2>
+            </motion.h2>
             <div className="grid gap-8">
               {projects.map((project, index) => (
-                <Card
+                <motion.div
                   key={index}
-                  className="bg-gradient-to-br from-gray-900/80 to-slate-900/80 dark:from-gray-900/80 dark:to-slate-900/80 light:from-white light:to-gray-50 border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10"
+                  variants={cardVariants}
+                  initial="hidden"
+                  animate={projectsRef.visibleItems[index] ? "visible" : "hidden"}
+                  whileHover={{ 
+                    y: -5,
+                    transition: { duration: 0.3 }
+                  }}
                 >
-                  <CardHeader>
-                    <div className="flex flex-col sm:flex-row items-start gap-4">
-                      <div className="text-emerald-400 mt-1 flex-shrink-0">{project.icon}</div>
-                      <div className="flex-1">
-                        <CardTitle className="text-xl lg:text-2xl mb-2 text-white dark:text-white light:text-gray-900 transition-colors duration-300">
-                          {project.title}
-                        </CardTitle>
-                        <CardDescription className="text-white/80 dark:text-white/80 light:text-gray-600 text-base leading-relaxed transition-colors duration-300">
-                          {project.description}
-                        </CardDescription>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <Badge
-                          key={tech}
-                          variant="outline"
-                          className="border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/20 transition-colors duration-300"
+                  <Card className="bg-gradient-to-br from-gray-900/80 to-slate-900/80 dark:from-gray-900/80 dark:to-slate-900/80 light:from-white light:to-gray-50 border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10">
+                    <CardHeader>
+                      <div className="flex flex-col sm:flex-row items-start gap-4">
+                        <motion.div 
+                          className="text-emerald-400 mt-1 flex-shrink-0"
+                          whileHover={{ 
+                            scale: 1.2,
+                            rotate: 10,
+                            transition: { duration: 0.2 }
+                          }}
                         >
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                          {project.icon}
+                        </motion.div>
+                        <div className="flex-1">
+                          <CardTitle className="text-xl lg:text-2xl mb-2 text-white dark:text-white light:text-gray-900 transition-colors duration-300">
+                            {project.title}
+                          </CardTitle>
+                          <CardDescription className="text-white/80 dark:text-white/80 light:text-gray-600 text-base leading-relaxed transition-colors duration-300">
+                            {project.description}
+                          </CardDescription>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, techIndex) => (
+                          <motion.div
+                            key={tech}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ 
+                              opacity: projectsRef.visibleItems[index] ? 1 : 0,
+                              scale: projectsRef.visibleItems[index] ? 1 : 0.8
+                            }}
+                            transition={{ 
+                              delay: techIndex * 0.1,
+                              duration: 0.3
+                            }}
+                            whileHover={{ scale: 1.05 }}
+                          >
+                            <Badge
+                              variant="outline"
+                              className="border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/20 transition-colors duration-300"
+                            >
+                              {tech}
+                            </Badge>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Section */}
-      <section
+      <motion.section
         id="contacto"
         className="py-20 bg-gradient-to-br from-gray-200 via-gray-100 to-white dark:from-black dark:via-slate-950 dark:to-gray-950 transition-colors duration-300"
+        ref={contactRef.ref}
+        initial="hidden"
+        animate={contactRef.isVisible ? "visible" : "hidden"}
+        variants={staggerContainerVariants}
       >
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-white dark:text-white light:text-gray-900 transition-colors duration-300">
+          <motion.h2 
+            className="text-3xl lg:text-4xl font-bold mb-6 text-white dark:text-white light:text-gray-900 transition-colors duration-300"
+            variants={fadeInUpVariants}
+          >
             ¡Construyamos Algo Grandioso Juntos!
-          </h2>
-          <p className="text-lg lg:text-xl text-gray-700 dark:text-white mb-8 transition-colors duration-300">
+          </motion.h2>
+          <motion.p 
+            className="text-lg lg:text-xl text-gray-700 dark:text-white mb-8 transition-colors duration-300"
+            variants={fadeInUpVariants}
+          >
             ¿Tienes un proyecto complejo en mente? Contáctame para discutir cómo puedo ayudarte a llevarlo al siguiente
             nivel.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          </motion.p>
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            variants={fadeInUpVariants}
+          >
             <Link href="mailto:olmervelasquez@hotmail.com">
-              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white transition-colors duration-300">
-                <Mail className="h-4 w-4 mr-2" />
-                Enviar Email
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white transition-colors duration-300">
+                  <Mail className="h-4 w-4 mr-2" />
+                  Enviar Email
+                </Button>
+              </motion.div>
             </Link>
             <Link href="/Hoja de vida OV.pdf" download>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-gray-900 dark:hover:text-gray-900 light:hover:text-white bg-transparent transition-colors duration-300"
-              >
-                Descargar CV
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-gray-900 dark:hover:text-gray-900 light:hover:text-white bg-transparent transition-colors duration-300"
+                >
+                  Descargar CV
+                </Button>
+              </motion.div>
             </Link>
-          </div>
-          <div className="mt-8 flex flex-col items-center gap-4">
-            <div className="flex items-center gap-2">
+          </motion.div>
+          <motion.div 
+            className="mt-8 flex flex-col items-center gap-4"
+            variants={fadeInUpVariants}
+          >
+            <motion.div 
+              className="flex items-center gap-2"
+              whileHover={{ scale: 1.02 }}
+            >
               <Mail className="h-5 w-5 text-emerald-400" />
               <span>olmervelasquez@hotmail.com</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  navigator.clipboard.writeText('olmervelasquez@hotmail.com')
-                    .then(() => {
-                      toast({ description: "Correo copiado al portapapeles." });
-                    });
-                }}
-              >
-                <Copy className="h-4 w-4" />
-              </Button>
-            </div>
-            <div className="flex items-center gap-2 mt-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md p-2 cursor-pointer transition-colors duration-300">
-              <Link href="https://wa.me/573108844273" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                <Button variant="ghost" size="sm">
-                  <FaWhatsapp className="h-5 w-5 text-green-500" />
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    navigator.clipboard.writeText('olmervelasquez@hotmail.com')
+                      .then(() => {
+                        toast({ description: "Correo copiado al portapapeles." });
+                      });
+                  }}
+                >
+                  <Copy className="h-4 w-4" />
                 </Button>
+              </motion.div>
+            </motion.div>
+            <motion.div 
+              className="flex items-center gap-2 mt-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md p-2 cursor-pointer transition-colors duration-300"
+              whileHover={{ scale: 1.02 }}
+            >
+              <Link href="https://wa.me/573108844273" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <Button variant="ghost" size="sm">
+                    <FaWhatsapp className="h-5 w-5 text-green-500" />
+                  </Button>
+                </motion.div>
                 <span className="hover:underline">+57 310 884 4273</span>
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-900 dark:bg-black text-gray-300 dark:text-white/60 transition-colors duration-300">
+      <motion.footer 
+        className="py-8 bg-gray-900 dark:bg-black text-gray-300 dark:text-white/60 transition-colors duration-300"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Fernando Velasquez - Desarrollador de Software Full Stack. Todos los derechos reservados.</p>
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            &copy; {new Date().getFullYear()} Fernando Velasquez - Desarrollador de Software Full Stack. Todos los derechos reservados.
+          </motion.p>
         </div>
-      </footer>
+      </motion.footer>
     </div>
   )
 }
