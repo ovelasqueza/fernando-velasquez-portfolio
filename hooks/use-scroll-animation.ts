@@ -7,6 +7,11 @@ export function useScrollAnimation(threshold: number = 0.1) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Usar threshold más bajo en móviles para mejor detección
+    const isMobile = window.innerWidth < 768
+    const effectiveThreshold = isMobile ? Math.min(threshold, 0.05) : threshold
+    const rootMargin = isMobile ? '0px 0px 0px 0px' : '0px 0px -50px 0px'
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -14,8 +19,8 @@ export function useScrollAnimation(threshold: number = 0.1) {
         }
       },
       {
-        threshold,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: effectiveThreshold,
+        rootMargin
       }
     )
 
@@ -38,6 +43,11 @@ export function useStaggeredAnimation(itemCount: number, delay = 0.1) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768
+    // En móviles: threshold más bajo y delays más cortos
+    const effectiveDelay = isMobile ? Math.min(delay, 0.1) : delay
+    const rootMargin = isMobile ? '0px 0px 50px 0px' : '0px 0px -50px 0px'
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -49,13 +59,13 @@ export function useStaggeredAnimation(itemCount: number, delay = 0.1) {
                 newState[i] = true
                 return newState
               })
-            }, i * delay * 1000)
+            }, i * effectiveDelay * 1000)
           }
         }
       },
       {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: isMobile ? 0.01 : 0.1,
+        rootMargin
       }
     )
 
