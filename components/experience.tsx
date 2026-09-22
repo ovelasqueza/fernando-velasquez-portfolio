@@ -23,7 +23,7 @@ export function Experience() {
     {
       company: "Sistemas Inteligentes de Monitoreo S.A.S",
       position: "Desarrollador de Software y Aplicaciones",
-      period: "2024/09 - Presente",
+      period: "2024/09 - 2026/09",
       location: "Remote/Cali Colombia",
       description:
         "Liderazgo técnico en el desarrollo de plataformas web con arquitectura de microservicios. Implementación de sistemas backend escalables, sistemas de análisis facial con modelos de inteligencia artificial",

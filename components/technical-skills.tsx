@@ -3,12 +3,12 @@
 import { Badge } from "@/components/ui/badge"
 import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/use-scroll-animation"
 import { motion } from "framer-motion"
-import { Cloud, Code, Database, Layers } from "lucide-react"
+import { Brain, Cloud, Code, Database, Layers } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export function TechnicalSkills() {
   const { ref, isVisible } = useScrollAnimation(0.1)
-  const skillsRef = useStaggeredAnimation(4, 0.15)
+  const skillsRef = useStaggeredAnimation(5, 0.15)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -18,10 +18,11 @@ export function TechnicalSkills() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  const languages = ["Python", "JavaScript", "PHP", "Java", "TypeScript"];
-  const frameworks = ["Node.js", "Vue.js", "React", "Angular", "Laravel", "Spring Boot", "FastAPI"];
-  const databases = ["MySQL", "PostgreSQL", "SQL Server", "Oracle"];
-  const devops = ["AWS", "GCP", "Docker", "CI/CD", "Scrum", "Clean Code", "API REST"];
+  const languages = ["Python", "JavaScript", "PHP", "Java", "TypeScript", "C#", "Dart"];
+  const frameworks = ["Node.js", "Vue.js", "React", "Angular", "Laravel", "Spring Boot", "FastAPI", ".NET", "Flutter"];
+  const databases = ["MySQL", "PostgreSQL", "SQL Server", "Oracle", "Firebase", "MongoDB"];
+  const devops = ["AWS", "GCP", "Docker", "CI/CD", "Scrum", "Clean Code", "API REST", "Git"];
+  const aiTools = ["LLMs", "Agentes IA", "RAG", "MCP", "Prompt Engineering", "OpenCV", "TensorFlow", "Computer Vision"];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -68,7 +69,7 @@ export function TechnicalSkills() {
         Habilidades Técnicas
       </motion.h2>
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         ref={skillsRef.ref}
         variants={containerVariants}
       >
@@ -183,6 +184,37 @@ export function TechnicalSkills() {
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: skillsRef.visibleItems[3] ? 1 : 0,
+                }}
+                transition={{
+                  delay: isMobile ? 0.1 + index * 0.05 : 0.4 + index * 0.1,
+                  duration: 0.3
+                }}
+              >
+                <Badge variant="outline" className="border-emerald-600/40 dark:border-emerald-500/30 text-gray-800 dark:text-white hover:bg-emerald-500/20 text-base">
+                  {tool}
+                </Badge>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+        <motion.div
+          className={`${cardClassName} md:col-span-2 lg:col-span-1`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={getCardAnimation(skillsRef.visibleItems[4])}
+          transition={{ duration: isMobile ? 0.4 : 0.6, ease: "easeOut" }}
+          whileHover={isMobile ? undefined : { scale: 1.02, transition: { duration: 0.2 } }}
+        >
+          <div className="flex items-center gap-2 mb-3">
+            <Brain className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+            <h4 className="text-lg font-semibold text-emerald-700 dark:text-emerald-400">IA & Machine Learning</h4>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {aiTools.map((tool, index) => (
+              <motion.div
+                key={tool}
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: skillsRef.visibleItems[4] ? 1 : 0,
                 }}
                 transition={{
                   delay: isMobile ? 0.1 + index * 0.05 : 0.4 + index * 0.1,

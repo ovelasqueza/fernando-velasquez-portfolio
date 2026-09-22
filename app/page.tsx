@@ -3,7 +3,7 @@
 import { Experience } from "@/components/experience";
 import { HeroSection } from "@/components/hero-section";
 import { Navigation } from "@/components/navigation";
-import { SectionDivider, DecorativeLine } from "@/components/section-divider";
+import { DecorativeLine } from "@/components/section-divider";
 import { TechnicalSkills } from "@/components/technical-skills";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,7 +20,7 @@ export default function Portfolio() {
   const { toast } = useToast();
   const aboutRef = useScrollAnimation(0.2);
   const servicesRef = useStaggeredAnimation(6, 0.15);
-  const projectsRef = useStaggeredAnimation(3, 0.2);
+  const projectsRef = useStaggeredAnimation(5, 0.2);
   const contactRef = useScrollAnimation(0.3);
 
   const fadeInUpVariants = {
@@ -59,11 +59,28 @@ export default function Portfolio() {
   };
   const projects: Project[] = [
     {
+      title: "Sistema de Monitoreo IoT - Simón Movilidad",
+      description:
+        "Plataforma full-stack de monitoreo de flotas vehiculares con telemetría en tiempo real vía WebSockets, alertas predictivas de combustible, autenticación JWT manual, y sincronización offline. Arquitectura Clean Architecture + DDD con backend en Java/Spring Boot, frontend Next.js con Zustand, y app móvil React Native (Expo).",
+      technologies: ["Java", "Spring Boot", "PostgreSQL", "Next.js", "React Native", "WebSockets", "Docker", "JWT"],
+      icon: <Server className="h-6 w-6" />,
+      githubUrl: "https://github.com/ovelasqueza/vehicle-monitoring-platform",
+    },
+    {
+      title: "Sistema de Gestión de Finanzas Personales",
+      description:
+        "Aplicación multiplataforma (Web, Android, iOS) desarrollada con Flutter y Firebase para el registro, categorización y análisis de ingresos y gastos. Implementa Clean Architecture con patrón BLoC, autenticación segura, reportes con gráficos y sincronización en tiempo real con Firestore.",
+      technologies: ["Flutter", "Firebase", "Dart", "BLoC", "Firestore", "Clean Architecture"],
+      icon: <Database className="h-6 w-6" />,
+      githubUrl: "https://github.com/ovelasqueza/personal-finance-tracker",
+    },
+    {
       title: "Plataforma Integral de Gestión de Tareas y Usuarios con Laravel, Angular y Flutter ",
       description:
         "Aplicación completa para la gestión de tareas y usuarios, compuesta por un backend API RESTful desarrollado en Laravel (PHP), un frontend web en Angular con Tailwind CSS y una aplicación móvil en Flutter.",
       technologies: ["PHP", "Angular", "Flutter", "Docker", "API RESTful"],
       icon: <Code className="h-6 w-6" />,
+      githubUrl: "https://github.com/ovelasqueza/Flutter-Angular-PHP-Laravel",
     },
     {
       title: "Weather App - Laravel",
@@ -71,6 +88,7 @@ export default function Portfolio() {
         "aplicación web desarrollada con Laravel que permite a los usuarios consultar el clima actual de diferentes ciudades del mundo. La aplicación utiliza la API de WeatherAPI para obtener datos meteorológicos en tiempo real.",
       technologies: ["PHP (Laravel)", "CSS", "API", "Docker"],
       icon: <Users className="h-6 w-6" />,
+      githubUrl: "https://github.com/ovelasqueza/Weather-App-Laravel",
     },
     {
       title: "Sistema de Reconocimiento Facial Inteligente con InsightFace y Despliegue en Google Cloud Run",
@@ -83,13 +101,13 @@ export default function Portfolio() {
 
   const services: Service[] = [
     {
-      title: "Desarrollo Full Stack",
-      description: "Aplicaciones web complejas desde frontend interactivo hasta backend robusto",
+      title: "Páginas Web a la Medida",
+      description: "Diseño y desarrollo de sitios web personalizados, adaptados a las necesidades específicas de tu negocio",
       icon: <Code className="h-8 w-8" />,
     },
     {
-      title: "Arquitectura Backend",
-      description: "Sistemas backend escalables con APIs REST, microservicios y alta disponibilidad",
+      title: "Desarrollo Full Stack",
+      description: "Aplicaciones web complejas y profesionales, desde frontend moderno hasta backend robusto y escalable",
       icon: <Server className="h-8 w-8" />,
     },
     {
@@ -120,7 +138,7 @@ export default function Portfolio() {
 
       <HeroSection />
 
-      <SectionDivider variant="wave" />
+      <DecorativeLine />
 
       {/* About Section */}
       <motion.section 
@@ -235,11 +253,11 @@ export default function Portfolio() {
         </div>
       </motion.section>
 
-      <SectionDivider variant="wave-reverse" />
+      <DecorativeLine />
 
       <Experience />
 
-      <SectionDivider variant="curve" />
+      <DecorativeLine />
 
       {/* Services Section */}
       <motion.section
@@ -353,7 +371,7 @@ export default function Portfolio() {
                         </div>
                       </div>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="space-y-4">
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech, techIndex) => (
                           <motion.div
@@ -378,6 +396,25 @@ export default function Portfolio() {
                           </motion.div>
                         ))}
                       </div>
+                      {project.githubUrl && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: projectsRef.visibleItems[index] ? 1 : 0 }}
+                          transition={{ delay: 0.5, duration: 0.3 }}
+                          className="pt-2"
+                        >
+                          <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-emerald-500 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-700 dark:hover:text-emerald-300 bg-transparent transition-all duration-300"
+                            >
+                              <Github className="h-4 w-4 mr-2" />
+                              Ver en GitHub
+                            </Button>
+                          </Link>
+                        </motion.div>
+                      )}
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -387,7 +424,7 @@ export default function Portfolio() {
         </div>
       </motion.section>
 
-      <SectionDivider variant="curve-reverse" />
+      <DecorativeLine />
 
       {/* Contact Section */}
       <motion.section
@@ -506,6 +543,7 @@ interface Project {
   description: string
   technologies: string[]
   icon: React.ReactNode
+  githubUrl?: string
 }
 
 interface Service {
