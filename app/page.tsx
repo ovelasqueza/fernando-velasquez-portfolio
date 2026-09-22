@@ -3,6 +3,7 @@
 import { Experience } from "@/components/experience";
 import { HeroSection } from "@/components/hero-section";
 import { Navigation } from "@/components/navigation";
+import { SectionDivider, DecorativeLine } from "@/components/section-divider";
 import { TechnicalSkills } from "@/components/technical-skills";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -119,6 +120,8 @@ export default function Portfolio() {
 
       <HeroSection />
 
+      <SectionDivider variant="wave" />
+
       {/* About Section */}
       <motion.section 
         id="sobre-mi" 
@@ -232,7 +235,11 @@ export default function Portfolio() {
         </div>
       </motion.section>
 
+      <SectionDivider variant="wave-reverse" />
+
       <Experience />
+
+      <SectionDivider variant="curve" />
 
       {/* Services Section */}
       <motion.section
@@ -292,6 +299,8 @@ export default function Portfolio() {
         </div>
       </motion.section>
 
+      <DecorativeLine />
+
       {/* Projects Section */}
       <motion.section 
         id="proyectos" 
@@ -304,7 +313,7 @@ export default function Portfolio() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <motion.h2 
-              className="text-4xl font-bold text-center mb-12 text-white dark:text-white light:text-gray-900 transition-colors duration-300"
+              className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white transition-colors duration-300"
               variants={fadeInUpVariants}
             >
               Proyectos Destacados
@@ -321,7 +330,7 @@ export default function Portfolio() {
                     transition: { duration: 0.3 }
                   }}
                 >
-                  <Card className="bg-gradient-to-br from-gray-900/80 to-slate-900/80 dark:from-gray-900/80 dark:to-slate-900/80 light:from-white light:to-gray-50 border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-2xl hover:shadow-emerald-500/30 md:shadow-md md:shadow-emerald-500/10 md:hover:shadow-xl md:hover:shadow-emerald-500/25">
+                  <Card className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900/80 dark:to-slate-900/80 border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-2xl hover:shadow-emerald-500/30 md:shadow-md md:shadow-emerald-500/10 md:hover:shadow-xl md:hover:shadow-emerald-500/25">
                     <CardHeader>
                       <div className="flex flex-col sm:flex-row items-start gap-4">
                         <motion.div 
@@ -335,10 +344,10 @@ export default function Portfolio() {
                           {project.icon}
                         </motion.div>
                         <div className="flex-1">
-                          <CardTitle className="text-xl lg:text-2xl mb-2 text-white dark:text-white light:text-gray-900 transition-colors duration-300">
+                          <CardTitle className="text-xl lg:text-2xl mb-2 text-gray-900 dark:text-white transition-colors duration-300">
                             {project.title}
                           </CardTitle>
-                          <CardDescription className="text-white/80 dark:text-white/80 light:text-gray-600 text-base leading-relaxed transition-colors duration-300">
+                          <CardDescription className="text-gray-600 dark:text-white/80 text-base leading-relaxed transition-colors duration-300">
                             {project.description}
                           </CardDescription>
                         </div>
@@ -362,7 +371,7 @@ export default function Portfolio() {
                           >
                             <Badge
                               variant="outline"
-                              className="border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/20 transition-colors duration-300"
+                              className="border-emerald-600/40 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 transition-colors duration-300"
                             >
                               {tech}
                             </Badge>
@@ -378,6 +387,8 @@ export default function Portfolio() {
         </div>
       </motion.section>
 
+      <SectionDivider variant="curve-reverse" />
+
       {/* Contact Section */}
       <motion.section
         id="contacto"
@@ -389,7 +400,7 @@ export default function Portfolio() {
       >
         <div className="container mx-auto px-4 text-center">
           <motion.h2 
-            className="text-3xl lg:text-4xl font-bold mb-6 text-white dark:text-white light:text-gray-900 transition-colors duration-300"
+            className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-300"
             variants={fadeInUpVariants}
           >
             ¡Construyamos Algo Grandioso Juntos!
